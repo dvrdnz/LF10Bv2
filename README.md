@@ -1,7 +1,14 @@
 # LF10Bv2
 Dieses Repository dokumentiert ein Infrastruktur-Lab aus dem Lernfeld **LF10Bv2 – Serverdienste bereitstellen und Administrationsaufgaben automatisieren**.
+Der Aufbau orientiert sich grundsätzlich an der vorgegebenen Aufgabenstellung.  
+Mehrere Komponenten wurden jedoch bewusst abweichend implementiert, um aktuelle
+Softwareversionen sowie praxisnahe Administrationskonzepte anzuwenden.
 
-Das Setup bildet eine kleine Unternehmensumgebung nach.
+Das begleitende Logbuch dokumentiert diese Abweichungen systematisch nach dem
+Schema **Soll – Ist – Begründung**. Dadurch wird transparent, welche Teile der
+Umgebung direkt der Aufgabenstellung entsprechen und an welchen Stellen
+technische Anpassungen oder Erweiterungen vorgenommen wurden.
+
 
 ## Komponenten
 
@@ -10,7 +17,8 @@ Das Setup bildet eine kleine Unternehmensumgebung nach.
 * Debian Server (DNS + DHCP)
 * Storage-System (TrueNAS)
 * Linux Client (Linux Mint)
-
+  
+Das Setup bildet eine kleine Unternehmensumgebung nach.
 Ziel des Labs ist die praktische Umsetzung grundlegender Server- und Netzwerkdienste.
 
 ---
