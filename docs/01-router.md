@@ -97,7 +97,9 @@ Implementierung eines Stateful-Firewall-Skripts
 `/scripts/fw_policy.sh`
 ```bash
 # Skript ausführbar machen
-chmod +x /scripts/fw_policy.sh  
+chmod +x /scripts/fw_policy.sh 
+# Skirpt ausführen
+./scripts/fw_policy.sh 
 ```
 **Grund:**
 
