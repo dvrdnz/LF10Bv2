@@ -94,9 +94,11 @@ iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 
 **Ist:**
 Implementierung eines Stateful-Firewall-Skripts 
-
 `/scripts/fw_policy.sh`
-
+```bash
+# Skript ausführbar machen
+chmod +x /scripts/fw_policy.sh  
+```
 **Grund:**
 
 Es handelt sich um eine klassische Gateway-Firewall, die ausschließlich den externen (gerouteten) Verkehr kontrolliert und den internen Netzwerkverkehr nicht beeinflusst. Bei aktuell wenigen Diensten bleibt das Regelwerk überschaubar und nachvollziehbar.
