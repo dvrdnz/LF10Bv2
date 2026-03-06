@@ -76,10 +76,21 @@ Dokumentation:
 
 ---
 
+# Server 1 (SRV1) 
+
+
+* Debian VM in Proxmox
+
+Dokumentation:
+
+`docs/03-server1.md`
+
+---
+
 # DNS Server
 
 * bind9
-* interne Domain: `gfn.internal`
+* interne Domain: `example.internal`
 * Forwarding DNS
 
 Dokumentation:
