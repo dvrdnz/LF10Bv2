@@ -129,3 +129,60 @@ Im Browser des Clients TrueNAS unter `https://storage.example.internal` aufrufen
 
 **Ist:**
 Identisch umgesetzt.
+
+---
+
+### 9. Einrichtung Speicherpool auf TrueNAS
+
+**Soll:**
+
+1. In der TrueNAS-Weboberfläche navigieren zu: Storage → Pools → „ADD" → „CREATE POOL".
+
+2. Einen Namen für den Pool festlegen (`Pool1`). Alle drei Festplatten (da1, da2, da3 – je 1 TiB) unter „Available Disks" auswählen und dem Pool hinzufügen.
+
+3. Resilienztyp auswählen: `Raid-z` (entspricht RAID 5). Auswahl mit „CREATE" bestätigen.
+
+4. Ergebnis: Aktiver Speicherpool `Pool1` mit einer Kapazität von ca. 2 TiB (ONLINE, lz4-Kompression).
+
+**Ist:**
+Identisch umgesetzt.
+
+---
+
+### 10. Bereitstellung eines iSCSI Targets
+
+**Soll:**
+
+1. In der TrueNAS-Weboberfläche navigieren zu: Sharing → Block Shares (iSCSI) → Wizard starten.
+
+2. Unter Punkt 1 einen Namen für das Target eingeben. Unter Device „Create New" wählen. Als Pool/Dataset `Pool1` auswählen. Größe: `1500 GiB`. Sharing Platform: `Modern OS` (Extent block size 4k, TPC enabled, no Xen compat mode, SSD speed). Mit „NEXT" bestätigen.
+
+3. Unter Punkt 2 ebenfalls „Create New" wählen. IP Address auf `0.0.0.0` setzen (lauscht auf allen Schnittstellen). Authentication Method unverändert lassen. Mit „NEXT" bestätigen.
+
+4. Unter Punkt 3 keine Einschränkung der Initiatoren vornehmen. Mit „NEXT" bestätigen.
+
+5. Unter Punkt 4 die Konfiguration des neuen Targets mit „SUBMIT" abschließen.
+
+6. Navigieren zu: Services → iSCSI aktivieren und Häkchen bei „Start Automatically" setzen.
+
+7. Der iSCSI-Dienst lauscht nun im Netzwerk auf Anfragen von Initiatoren und stellt das erstellte Target zur Verfügung.
+
+**Ist:**
+Identisch umgesetzt.
+
+---
+
+### 11. Anbindung des iSCSI Targets auf dem Virtualisierungshost (Proxmox)
+
+**Soll:**
+
+1. In der Proxmox-Weboberfläche navigieren zu: Rechenzentrum → Storage → „Hinzufügen".
+
+2. Aus der Liste `iSCSI` auswählen.
+
+3. Im Dialog einen Namen für den neuen Speicher angeben (`iscsi-storage`). Als Portal die IP-Adresse des TrueNAS-Servers eintragen (`192.168.10.12`). Das Target wird vom Assistenten automatisch ermittelt. Bei mehreren vorhandenen Targets kann an dieser Stelle ausgewählt werden.
+
+4. Nach dem Hinzufügen wird der Speicher automatisch initialisiert und steht zusätzlich zum lokalen Speicher zur Verfügung (`iscsi-storage (pve)` erscheint in der Seitenleiste unter `pve`).
+
+**Ist:**
+Identisch umgesetzt.
