@@ -14,7 +14,8 @@ technische Anpassungen oder Erweiterungen vorgenommen wurden.
 
 * Debian Router (NAT Gateway + Firewall)
 * Virtualisierungshost (Proxmox VE)
-* Debian Server (DNS + DHCP)
+* Debian Server 1 (DNS + DHCP)
+* Debian Server 2 (Webserver, Nextcloud, iSCSI-Backup)
 * Storage-System (TrueNAS)
 * Linux Client (Linux Mint)
   
@@ -27,13 +28,14 @@ Ziel des Labs ist die praktische Umsetzung grundlegender Server- und Netzwerkdie
 
 Netzwerk: `192.168.10.0/24`
 
-| Host    | Funktion             | IP            |
-| ------- | -------------------- | ------------- |
-| router  | Gateway / Firewall   | 192.168.10.1  |
-| proxmox | Virtualisierungshost | 192.168.10.10 |
-| srv1    | DNS + DHCP Server    | 192.168.10.11 |
-| storage | TrueNAS Storage      | 192.168.10.12 |
-| client  | Linux Mint Client    | 192.168.10.50 |
+| Host    | Funktion                              | IP            |
+| ------- | ------------------------------------- | ------------- |
+| router  | Gateway / Firewall                    | 192.168.10.1  |
+| proxmox | Virtualisierungshost                  | 192.168.10.10 |
+| srv1    | DNS + DHCP Server                     | 192.168.10.11 |
+| srv2    | Webserver, Nextcloud, iSCSI-Backup    | 192.168.10.13 |
+| storage | TrueNAS Storage                       | 192.168.10.12 |
+| client  | Linux Mint Client                     | 192.168.10.50 |
 
 ---
 
@@ -45,6 +47,10 @@ Netzwerk: `192.168.10.0/24`
 * bind9 (DNS Server)
 * Kea DHCPv4
 * TrueNAS
+* Apache2
+* PHP 8.4
+* MariaDB
+* Nextcloud
 * iptables / netfilter
 
 ---
@@ -123,6 +129,25 @@ Dokumentation:
 
 ---
 
+# Server 2 (SRV2)
+
+* Debian VM in Proxmox
+* Apache2 Webserver
+* Virtual Hosts
+* Nextcloud (PHP 8.4, MariaDB, SSL)
+
+Dokumentation:
+
+`docs/07-server2.md` – Basisinstallation
+
+`docs/08-backup.md` – iSCSI-Backup & Automatisierung
+
+`docs/09-apache.md` – Apache2 & vHosts
+
+`docs/10-nextcloud.md` – Nextcloud Installation & HTTPS
+
+---
+
 # Firewall Script
 
 Stateful Firewall Policy:
@@ -141,6 +166,23 @@ Features:
 
 ---
 
+# Backup Script
+
+Automatisiertes iSCSI-Backup:
+
+```
+scripts/backup.sh
+```
+
+Features:
+
+* iSCSI-Target einbinden (target02)
+* rsync-Backup von `/var/www` und `/etc`
+* Datumsstempel-Verzeichnis
+* Target nach Backup sauber aushängen
+
+---
+
 # Netzwerkdiagramm
 
 ```
@@ -154,12 +196,12 @@ Internet
       │
       │ Firmennetz (192.168.10.0/24)
       │
- ┌────┼───────────────┬─────────────┐
- │    │               │             │
- │ ┌─────────┐     ┌────────┐     ┌─────────┐
- │ │ Proxmox │     │ SRV1   │     │ Storage │
- │ │   .10   │     │   .11  │     │    .12  │         
- │ └─────────┘     └────────┘     └─────────┘
+ ┌────┼───────────────┬─────────────┬─────────────┐
+ │    │               │             │             │
+ │ ┌─────────┐     ┌────────┐     ┌────────┐   ┌─────────┐
+ │ │ Proxmox │     │ SRV1   │     │ SRV2   │   │ Storage │
+ │ │   .10   │     │   .11  │     │   .13  │   │    .12  │
+ │ └─────────┘     └────────┘     └────────┘   └─────────┘
  │
  └──── Admin-Client (Linux Mint)
        .50
@@ -180,8 +222,11 @@ Physical Host (Remote Lab – Windows Server 2019 Datacenter)
     ├── Proxmox VM
     │      → Hypervisor (Nested Virtualization)
     │      │
-    │      └── srv1 (pve100)
-    │             → DNS + DHCP
+    │      ├── srv1 (pve100)
+    │      │      → DNS + DHCP
+    │      │
+    │      └── srv2 (pve101)
+    │             → Apache2 Webserver, Nextcloud, iSCSI-Backup
     │
     ├── TrueNAS VM
     │      → File Server (Storage)
