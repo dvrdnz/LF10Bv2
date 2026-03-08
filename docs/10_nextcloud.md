@@ -219,3 +219,49 @@ Identisch umgesetzt.
 
 **Ist:**
 Identisch umgesetzt. Nextcloud-Installation erfolgreich abgeschlossen. Dashboard erreichbar unter `http://nextcloud.example.internal`.
+
+---
+
+### 11. HTTPS mit selbstsigniertem Zertifikat
+
+**Soll:**
+
+1. openssl installieren:
+```bash
+sudo apt update && sudo apt install -y openssl
+```
+
+2. SSL-Modul für Apache aktivieren:
+```bash
+sudo a2enmod ssl
+```
+
+3. Selbstsigniertes Zertifikat generieren:
+```bash
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+  -keyout /etc/ssl/private/apache-selfsigned.key \
+  -out /etc/ssl/certs/apache-selfsigned.crt
+```
+
+4. Neuen `<VirtualHost *:443>` Block in die bestehende nextcloud.example.internal.conf einfügen:
+```apacheconf
+<VirtualHost *:443>
+    ServerName nextcloud.example.internal
+    DocumentRoot /var/www/nextcloud
+
+    SSLEngine on
+    SSLCertificateFile    /etc/ssl/certs/apache-selfsigned.crt
+    SSLCertificateKeyFile /etc/ssl/private/apache-selfsigned.key
+</VirtualHost>
+```
+
+5. Apache neu starten:
+```bash
+sudo systemctl restart apache2
+```
+
+6. Validierung: `https://nextcloud.example.internal` im Browser aufrufen. Zertifikatswarnung erscheint (selbstsigniert, erwartet).
+
+**Ist:**
+Identisch umgesetzt.
+
