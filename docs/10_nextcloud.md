@@ -56,7 +56,7 @@ sudo systemctl restart apache2
 ```
 
 **Ist:**
-Identisch umgesetzt.
+Identisch umgesetzt auf /etc/php/8.4/apache2/php.ini
 
 ---
 
