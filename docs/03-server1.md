@@ -37,6 +37,7 @@ ISO (nicht netinst) direkt herunterladen und im ISO-Verzeichnis ablegen:
 curl -L -# -o /var/lib/vz/template/iso/debian-13.3.0-amd64-DVD-1.iso \
   https://ftp-stud.hs-esslingen.de/Mirrors/debian-cd/13.3.0/amd64/iso-dvd/debian-13.3.0-amd64-DVD-1.iso
 ```
+<img width="1032" height="66" alt="Screenshot 2026-03-04 003536" src="https://github.com/user-attachments/assets/30d04aa7-e60c-45d3-9e1b-68abfc376fd4" />
 
 **Grund für Abweichung:**
 Die restriktive Default-Drop-Policy des Routers erlaubt keine DNS-Weiterleitung vom LAN ins WAN. Der Download über das Webinterface war daher nicht möglich. Der manuelle Weg stellt eine funktionale und kontrollierte Alternative dar. Der Mirror `ftp-stud.hs-esslingen.de` ist offiziell.
