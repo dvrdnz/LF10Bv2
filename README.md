@@ -15,7 +15,7 @@ technische Anpassungen oder Erweiterungen vorgenommen wurden.
 * Debian Router (NAT Gateway + Firewall)
 * Virtualisierungshost (Proxmox VE)
 * Debian Server 1 (DNS + DHCP)
-* Debian Server 2 (Webserver, Nextcloud, iSCSI-Backup)
+* Debian Server 2 (Webserver, Nextcloud, Docker, iSCSI-Backup)
 * Storage-System (TrueNAS)
 * Linux Client (Linux Mint)
   
@@ -51,6 +51,9 @@ Netzwerk: `192.168.10.0/24`
 * PHP 8.4
 * MariaDB
 * Nextcloud
+* Docker & docker-compose
+* Chrony (NTP)
+* Portainer
 * iptables / netfilter
 
 ---
@@ -132,9 +135,13 @@ Dokumentation:
 # Server 2 (SRV2)
 
 * Debian VM in Proxmox
-* Apache2 Webserver
-* Virtual Hosts
+* Apache2 Webserver & Virtual Hosts
 * Nextcloud (PHP 8.4, MariaDB, SSL)
+* iSCSI-Backup (rsync, cron)
+* Docker & docker-compose
+* Chrony NTP-Server
+* Portainer (inkl. FreshRSS)
+* Reverse Proxy & Portfreigabe
 
 Dokumentation:
 
@@ -145,6 +152,12 @@ Dokumentation:
 `docs/09-apache.md` – Apache2 & vHosts
 
 `docs/10-nextcloud.md` – Nextcloud Installation & HTTPS
+
+`docs/11-docker.md` – Docker Installation
+
+`docs/12-chrony-portainer.md` – Chrony, Portainer & FreshRSS
+
+`docs/13-reverse-proxy.md` – Reverse Proxy & Portfreigabe
 
 ---
 
@@ -226,7 +239,7 @@ Physical Host (Remote Lab – Windows Server 2019 Datacenter)
     │      │      → DNS + DHCP
     │      │
     │      └── srv2 (pve101)
-    │             → Apache2 Webserver, Nextcloud, iSCSI-Backup
+    │             → Apache2, Nextcloud, Docker, Chrony, Portainer, iSCSI-Backup
     │
     ├── TrueNAS VM
     │      → File Server (Storage)
