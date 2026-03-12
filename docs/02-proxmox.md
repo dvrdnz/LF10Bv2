@@ -75,8 +75,8 @@ Ergänzung in fw_policy.sh auf Router-VM – Portweiterleitung für externen RDP
 ```bash
 cat << 'EOF' >> ./scripts/fw_policy.sh
 ### RDP-Zugriff aus dem VPN-Netz auf den Admin-Client
-iptables -t nat -A PREROUTING -i $WAN_IF -p tcp --dport 3389 -j DNAT --to-destination 192.168.10.50:3389
-iptables -A FORWARD -p tcp -d 192.168.10.50 --dport 3389 -m conntrack --ctstate NEW -j ACCEPT
+/usr/sbin/iptables -t nat -A PREROUTING -i $WAN_IF -p tcp --dport 3389 -j DNAT --to-destination 192.168.10.50:3389
+/usr/sbin/iptables -A FORWARD -p tcp -d 192.168.10.50 --dport 3389 -m conntrack --ctstate NEW -j ACCEPT
 EOF
 # Skript erneut ausführen
 ./scripts/fw_policy.sh
@@ -84,6 +84,6 @@ EOF
 `https://192.168.10.10:8006` ist erreichbar.
 
 **Grund:**
-So kann man ohne Umweg über das RemoteLab direkt auf den Admin-Client zugegriffen werden.
+So kann ohne Umweg über das RemoteLab direkt auf den Admin-Client zugegriffen werden.
 
 ---
