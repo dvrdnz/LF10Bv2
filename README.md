@@ -4,10 +4,12 @@ Der Aufbau orientiert sich grundsätzlich an der vorgegebenen Aufgabenstellung.
 Mehrere Komponenten wurden jedoch bewusst abweichend implementiert, um aktuelle
 Softwareversionen sowie praxisnahe Administrationskonzepte anzuwenden.
 
-Das begleitende Logbuch in `docs/` dokumentiert diese Abweichungen systematisch nach dem
+Das begleitende Logbuch in [docs/](docs/) dokumentiert diese Abweichungen systematisch nach dem
 Schema **Soll – Ist – Begründung**. Dadurch wird transparent, welche Teile der
 Umgebung direkt der Aufgabenstellung entsprechen und an welchen Stellen
 technische Anpassungen oder Erweiterungen vorgenommen wurden.
+
+> **🔗 Fortsetzung**: Dieses Projekt wurde fortgesetzt in [LF11Bv2](https://github.com/dvrdnz/LF11Bv2/tree/main)
 
 
 ## Komponenten
@@ -67,7 +69,7 @@ Netzwerk: `192.168.10.0/24`
 
 Dokumentation:
 
-`docs/01-router.md`
+[docs/01-router.md](docs/01-router.md)
 
 ---
 
@@ -81,7 +83,7 @@ Dokumentation:
 
 Dokumentation:
 
-`docs/02-proxmox.md`
+[docs/02-proxmox.md](docs/02-proxmox.md)
 
 ---
 
@@ -92,7 +94,7 @@ Dokumentation:
 
 Dokumentation:
 
-`docs/03-server1.md`
+[docs/03-server1.md](docs/03-server1.md)
 
 ---
 
@@ -104,7 +106,7 @@ Dokumentation:
 
 Dokumentation:
 
-`docs/04-dns-bind9.md`
+[docs/04-dns-bind9.md](docs/04-dns-bind9.md)
 
 ---
 
@@ -116,7 +118,7 @@ Dokumentation:
 
 Dokumentation:
 
-`docs/05-dhcp-kea.md`
+[docs/05-dhcp-kea.md](docs/05-dhcp-kea.md)
 
 ---
 
@@ -128,7 +130,7 @@ Dokumentation:
 
 Dokumentation:
 
-`docs/06-truenas.md`
+[docs/06-truenas.md](docs/06-truenas.md)
 
 ---
 
@@ -145,19 +147,19 @@ Dokumentation:
 
 Dokumentation:
 
-`docs/07-server2.md` – Basisinstallation
+[docs/07-server2.md](docs/07-server2.md) – Basisinstallation
 
-`docs/08-backup.md` – iSCSI-Backup & Automatisierung
+[docs/08-backup.md](docs/08-backup.md) – iSCSI-Backup & Automatisierung
 
-`docs/09-apache.md` – Apache2 & vHosts
+[docs/09-apache.md](docs/09-apache.md) – Apache2 & vHosts
 
-`docs/10-nextcloud.md` – Nextcloud Installation & HTTPS
+[docs/10-nextcloud.md](docs/10-nextcloud.md) – Nextcloud Installation & HTTPS
 
-`docs/11-docker.md` – Docker Installation
+[docs/11-docker.md](docs/11-docker.md) – Docker Installation
 
-`docs/12-chrony-portainer.md` – Chrony, Portainer & FreshRSS
+[docs/12-chrony-portainer.md](docs/12-chrony-portainer.md) – Chrony, Portainer & FreshRSS
 
-`docs/13-reverse-proxy.md` – Reverse Proxy & Portfreigabe
+[docs/13-reverse-proxy.md](docs/13-reverse-proxy.md) – Reverse Proxy & Portfreigabe
 
 ---
 
@@ -165,9 +167,7 @@ Dokumentation:
 
 Stateful Firewall Policy:
 
-```
-scripts/fw_policy.sh
-```
+[scripts/fw_policy.sh](scripts/fw_policy.sh)
 
 Features:
 
@@ -183,9 +183,7 @@ Features:
 
 Automatisiertes iSCSI-Backup:
 
-```
-scripts/backup.sh
-```
+[scripts/backup.sh](scripts/backup.sh)
 
 Features:
 
@@ -251,3 +249,5 @@ Physical Host (Remote Lab – Windows Server 2019 Datacenter)
 # Lizenz
 
 Dieses Repository dient ausschließlich Lern- und Demonstrationszwecken.
+
+[MIT License](LICENSE)
